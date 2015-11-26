@@ -4,8 +4,11 @@ require 'active_support/inflector'
 require 'erb'
 require_relative './session'
 require_relative './flash'
+require_relative './csrf_protection'
 
 class ControllerBase
+  include CSRFProtection
+
   attr_reader :req, :res, :params
 
   # Setup the controller
@@ -13,6 +16,8 @@ class ControllerBase
     @req, @res = req, res
     @params = route_params.merge(req.params)
     @already_built_response = false
+
+    protect_from_forgery
   end
 
   # Helper method to alias @already_built_response
@@ -55,6 +60,8 @@ class ControllerBase
     path = "views/#{controller_name}/#{template_name}.html.erb"
     file_content = File.read(path)
     template = ERB.new(file_content)
+
+    form_authenticity_token = authenticity_token
 
     content = template.result(binding)
     content_type = 'text/html'
