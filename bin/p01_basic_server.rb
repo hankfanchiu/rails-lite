@@ -1,6 +1,5 @@
 require 'rack'
 
-
 app = Proc.new do |env|
   req = Rack::Request.new(env)
   res = Rack::Response.new

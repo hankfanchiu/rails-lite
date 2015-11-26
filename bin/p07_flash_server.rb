@@ -43,7 +43,6 @@ class Dog
     { name: name, owner: owner }.inspect
   end
 end
-require 'byebug'
 
 class DogsController < ControllerBase
   def create

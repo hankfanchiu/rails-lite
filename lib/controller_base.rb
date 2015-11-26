@@ -4,7 +4,6 @@ require 'active_support/inflector'
 require 'erb'
 require_relative './session'
 require_relative './flash'
-require 'byebug'
 
 class ControllerBase
   attr_reader :req, :res, :params
