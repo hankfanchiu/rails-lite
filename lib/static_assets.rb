@@ -1,7 +1,7 @@
 require 'erb'
 require 'rack'
 
-class StackTracer
+class StaticAssets
   attr_reader :app
 
   def initialize(app)

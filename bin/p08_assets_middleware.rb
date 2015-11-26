@@ -1,7 +1,7 @@
 require 'rack'
 require_relative '../lib/controller_base'
-require_relative '../lib/stack_tracer'
-require_relative '../lib/asset_server'
+require_relative '../lib/static_assets'
+require_relative '../lib/asset_publisher'
 
 class NotFoundController < ControllerBase
   def go
@@ -22,7 +22,7 @@ end
 
 app = Rack::Builder.new do
   use StackTracer
-  use AssetServer
+  use StaticAssets
   run my_app
 end
 

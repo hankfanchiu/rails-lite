@@ -1,6 +1,6 @@
 require 'rack'
 
-class AssetServer
+class AssetPublisher
   attr_reader :app
 
   def initialize(app)

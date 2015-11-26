@@ -1,8 +1,6 @@
 require 'rack'
 require_relative '../lib/controller_base'
 require_relative '../lib/router'
-require_relative '../lib/flash'
-require_relative '../lib/stack_tracer'
 
 class Dog
   attr_reader :name, :owner
@@ -76,19 +74,14 @@ router.draw do
   post Regexp.new("^/dogs$"), DogsController, :create
 end
 
-dog_app = Proc.new do |env|
+app = Proc.new do |env|
   req = Rack::Request.new(env)
   res = Rack::Response.new
   router.run(req, res)
   res.finish
 end
 
-app = Rack::Builder.new do
-  use StackTracer
-  run app
-end
-
 Rack::Server.start(
- app: dog_app,
+ app: app,
  Port: 3000
 )
