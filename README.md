@@ -2,7 +2,7 @@
 
 A lightweight version of Ruby on Rails -- the "Rails Lite on Rack" web framework.
 
-Rails Lite includes ActiveRecord Lite, a lightweight version of ActiveRecord.
+Rails Lite includes ActiveRecord Lite, a lightweight version of ActiveRecord and an object-relational mapper (ORM) between Ruby and SQL.
 
 The purpose of this Rails Lite project is to demonstrate understanding of MVC, the Ruby on Rails framework, and ActiveRecord-assisted SQL commands.
 
@@ -36,7 +36,7 @@ The Controller Base functions similarly to the ActionController::Base in Ruby on
 
 ### Model Base
 
-The Model Base serves as the base class for user-generated models. It is a lightweight version of the ActiveRecord::Base class in Ruby on Rails, used for object-relational mapping (ORM) between Ruby and SQL.
+The Model Base serves as the base class for user-generated models. It is a lightweight version of the ActiveRecord::Base class in Ruby on Rails, used for ORM between Ruby and SQL.
 
 Included methods are the standard queries:
 
