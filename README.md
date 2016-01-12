@@ -6,19 +6,17 @@ Rails Lite includes ActiveRecord Lite, a lightweight version of ActiveRecord.
 
 The purpose of this Rails Lite project is to demonstrate understanding of MVC, the Ruby on Rails framework, and ActiveRecord-assisted SQL commands.
 
-## Infrastructure
+## Server Infrastructure
 
 Rails Lite is run on a Rack server, located in `/bin/server.rb`, utilizing the API to handle HTTP requests and responses.
 
-### Middlewares
-
 Two custom middlewares are implemented: Stack Tracer and Static Assets.
 
-#### Stack Tracer
+### Stack Tracer
 
 The Stack Tracer is the first in the middleware stack to rescue all exceptions raised by any subsequent middlewares and app. It outputs a status 500 error, formatted in HTML, when any exception is raised.
 
-#### Static Assets
+### Static Assets
 
 Certain static assets are made accessible to the public by sending a GET request with `/public/` included in the path after the hostname.
 
@@ -38,7 +36,9 @@ The Controller Base functions similarly to the ActionController::Base in Ruby on
 
 ### Model Base
 
-The Model Base serves as the base class for user-generated models. Included methods are the standard SQL queries:
+The Model Base serves as the base class for user-generated models. It is a lightweight version of the ActiveRecord::Base class in Ruby on Rails, used for object-relational mapping (ORM) between Ruby and SQL.
+
+Included methods are the standard queries:
 
 ```
 #all
@@ -48,7 +48,7 @@ The Model Base serves as the base class for user-generated models. Included meth
 #save
 ```
 
-In addition, inheriting from Model Base grants the `#where` method, from the Searchable module, to dynamically query from the SQL RDBMS.
+In addition, inheriting from Model Base grants the `#where` method from the Searchable module, to dynamically query from the SQL RDBMS.
 
 The Associatable module is extended as well, to provide the three standard methods for model associations:
 
