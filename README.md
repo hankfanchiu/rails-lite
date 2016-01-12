@@ -6,7 +6,7 @@ Rails Lite includes ActiveRecord "Lite", a lightweight version of ActiveRecord f
 
 The purpose of this Rails Lite project is to demonstrate our understanding of MVC, the Ruby on Rails frameworks, and ActiveRecord-assisted SQL commands.
 
-## Architecture & Features
+## Infrastructure
 
 Rails Lite is run on a Rack server, located in `/bin/server.rb`.
 
@@ -23,6 +23,10 @@ The first middleware in the middleware stack to rescue all exceptions raised by 
 Certain static assets are made accessible to the public by sending a GET request with `/public/` included in the path after the hostname.
 
 The Static Asset middleware matches the `/public/` path and responds with the corresponding static asset.
+
+## Architecture and MVC
+
+Rails Lite includes a custom router, controller base, and model base.
 
 ### Router
 
@@ -53,6 +57,16 @@ belongs_to
 has_many
 has_one_through
 ```
+
+## Additional Features
+
+### Session & Flash
+
+Both client session and flash notifications are stored as cookies through the Rack cookie-setter and getter methods.
+
+Additionally, Flash has two variations: `flash.now` and `flash`.
+
+`Flash#now` is used for displaying notifications on view renders. Meanwhile, the standard flash is for the flash notification(s) to persist through a redirect via cookie.
 
 ### CSRF Protection
 
