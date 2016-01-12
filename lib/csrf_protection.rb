@@ -1,6 +1,5 @@
 require 'securerandom'
 require 'json'
-require 'byebug'
 
 module CSRFProtection
   def protect_from_forgery

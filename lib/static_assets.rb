@@ -1,4 +1,3 @@
-require 'erb'
 require 'rack'
 
 class StaticAssets
@@ -6,32 +5,29 @@ class StaticAssets
 
   def initialize(app)
     @app = app
+    @public_path = Regexp.new("^\/assets\/")
   end
 
   def call(env)
-    begin
+    req = Rack::Request.new(env)
+    path = req.path
+
+    if path.match(@public_path)
+      render_asset(path)
+    else
       app.call(env)
-    rescue => exception
-      render_exception(exception)
     end
   end
 
   private
 
-  def render_exception(exception)
-    body = response_body(exception)
+  def render_asset(path)
+    asset_path = path.sub(@public_path, "/public/")
+    file = File.read(asset_path)
 
     res = Rack::Response.new
-    res.status = 500
-    res['Content-Type'] = 'text/html'
-    res.write(body)
+    res['Content-Type'] = 'mime-type'
+    res.write(file)
     res.finish
-  end
-
-  def response_body(exception)
-    file_content = File.read('views/errors/runtime.html.erb')
-    error_template = ERB.new(file_content)
-
-    error_template.result(binding)
   end
 end

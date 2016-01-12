@@ -30,7 +30,7 @@ class ControllerBase
     raise "Already redirected" if already_built_response?
 
     @res.status = 302
-    @res['Location'] = url
+    @res['Location'] = url.to_s
 
     session.store_session(@res)
     flash.store_flash(@res)
@@ -53,8 +53,8 @@ class ControllerBase
     @already_built_response = true
   end
 
-  # use ERB and binding to evaluate templates
-  # pass the rendered html to render_content
+  # Use ERB and binding to evaluate templates
+  # Pass the rendered HTML to render_content
   def render(template_name)
     controller_name = self.class.name.underscore
     path = "views/#{controller_name}/#{template_name}.html.erb"
@@ -69,7 +69,6 @@ class ControllerBase
     render_content(content, content_type)
   end
 
-  # method exposing a `Session` object
   def session
     @session ||= Session.new(@req)
   end
@@ -78,10 +77,9 @@ class ControllerBase
     @flash ||= Flash.new(@req)
   end
 
-  # use this with the router to call action_name (:index, :show, :create...)
+  # Use this with the router to call action name (:index, :show, :create...)
   def invoke_action(name)
     send(name)
     render(name) unless already_built_response?
   end
 end
-
